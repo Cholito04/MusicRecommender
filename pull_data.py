@@ -4,6 +4,11 @@ import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
 import requests
+import os
+
+# pip install scikit-learn
+# used to normalize data
+from sklearn.preprocessing import MinMaxScaler
 
 
 # Authenticate using client credentials
@@ -17,6 +22,21 @@ RECCO_BEATS_API_URL = "https://api.reccobeats.com/v1/audio-features?ids="
 RECCO_BEATS_HEADERS = {
     'Accept': 'application/json'
 }
+
+
+def normalize_features(df):
+    feature_cols = [
+        "danceability", "energy", "valence", "speechiness",
+        "acousticness", "instrumentalness", "liveness",
+        "tempo", "loudness"
+    ]
+
+    # drop rows with missing values
+    df = df.dropna(subset=feature_cols)
+
+    scaler = MinMaxScaler()
+    df[feature_cols] = scaler.fit_transform(df[feature_cols])
+    return df, scaler
 
 
 def fetch_playlist_features(playlist_id):
@@ -53,17 +73,23 @@ def fetch_playlist_features(playlist_id):
         content = data.get('content', [])
 
         features = content[0] if content else {}
-
         if features == {}:
             continue  # skip if no features found
         tracks.append({
             'track_id': track['id'],
             'track_name': track['name'],
             'artist_name': track['artists'][0]['name'],
+
+            # audio features
             "danceability": features.get("danceability"),
             "energy": features.get("energy"),
             "valence": features.get("valence"),
             "speechiness": features.get("speechiness"),
+            "acousticness": features.get("acousticness"),
+            "instrumentalness": features.get("instrumentalness"),
+            "liveness": features.get("liveness"),
+            "tempo": features.get("tempo"),
+            "loudness": features.get("loudness")
         })
     return tracks
 
@@ -71,15 +97,18 @@ def fetch_playlist_features(playlist_id):
 def get_candidate_tracks(c_playlist_id, filename="candidate_tracks.csv"):
     # Check if CandidateTracks csv exists
 
-    if pd.read_csv(filename) is not None:
+    if os.path.exists(filename):
         print("Candidate tracks loaded from CSV.")
         return pd.read_csv(filename)
     else:
         print("Candidate tracks CSV not found creating new DataFrame.")
         candidate_tracks = fetch_playlist_features(c_playlist_id)
 
-        # Create DataFrame
+        # create DataFrame
         candidate_tracks = pd.DataFrame(candidate_tracks)
+
+        # normalize the data
+        candidate_tracks, scaler = normalize_features(candidate_tracks)
 
         # save to csv
         candidate_tracks.to_csv("candidate_tracks.csv", index=False)
@@ -88,14 +117,20 @@ def get_candidate_tracks(c_playlist_id, filename="candidate_tracks.csv"):
 
 def main():
     # ask user for public playlist link
+    # inide playlist https://open.spotify.com/playlist/79hPczJyRLvtRzJofioJ3Y?si=5f86dd594b58409c
     # just press enter to use default playlist
     liked_playlist_id = input("Enter the public playlist share link: ")
     if liked_playlist_id == "":
         liked_playlist_id = "https://open.spotify.com/playlist/10MGklkCciIqPR9cHRbQJW?si=9bdc9d45f4cb400f"
-    liked_tracks = fetch_playlist_features(liked_playlist_id)
+        if pd.read_csv("liked_songs.csv") is not None:
+            print("Liked tracks loaded from CSV.")
+            liked_data = pd.read_csv("liked_songs.csv")
+    else:
+        liked_tracks = fetch_playlist_features(liked_playlist_id)
+        # Create DataFrame
+        liked_data = pd.DataFrame(liked_tracks)
 
-    # Create DataFrame
-    liked_data = pd.DataFrame(liked_tracks)
+    liked_data, liked_scaler = normalize_features(liked_data)
     print(liked_data, "\n")
 
     # save to csv
