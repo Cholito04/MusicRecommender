@@ -1,6 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
 def summarize_data(csv_path):
     df = pd.read_csv(csv_path)
 
@@ -28,6 +29,7 @@ def summarize_data(csv_path):
 
     plt.tight_layout()
     plt.show()
+
 
 if __name__ == "__main__":
     summarize_data("liked_songs.csv")
