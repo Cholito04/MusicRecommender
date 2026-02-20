@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+    --crt-red: rgb(191, 66, 66);
+    --crt-green: rgb(112, 159, 115);
+    --crt-blue: rgb(40, 129, 206);
+}
+
+
+/* CRT effect applied to body or main */
+body {
+    background-color: rgb(25, 25, 30);
+    text-shadow: 0 0 0.2em currentColor, 1px 1px rgba(255, 0, 255, 0.5),
+        -1px -1px rgba(0, 255, 255, 0.4);
+    position: relative;
+}
+
+body:before,
+body:after {
+    content: "";
+    transform: translateZ(0);
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    position: fixed; /* Changed from absolute to fixed so it covers viewport */
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+}
+
+body:before {
+    background: 
+        /* Vignette effect */
+        radial-gradient(
+            ellipse at center,
+            transparent 30%,
+            rgba(0, 0, 0, 0.3) 75%,
+            rgba(0, 0, 0, 0.8) 100%
+        ),
+        /* CRT horizontal scanlines */
+        repeating-linear-gradient(
+            0deg,
+            var(--crt-red) 0px,
+            var(--crt-green) 2px,
+            var(--crt-blue) 4px
+        );
+}
+
+body:after {
+    background: repeating-linear-gradient(
+        90deg,
+        var(--crt-red) 1px,
+        var(--crt-green) 2px,
+        var(--crt-blue) 3px
+    );
+}
+
+.pink {
+    color: pink;
+}
+.yellow {
+    color: yellow;
+}
+.lightblue {
+    color: lightblue;
+}
+
+.wrapper {
+    padding-top: 2rem;
+    padding-left: 1rem;
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    z-index: 2; /* Above the CRT overlay */
+}
+
+.code {
+    animation: typewriter 1s steps(14) 1s 1 normal both;
+    line-height: 1;
+    margin: 0;
+    display: inline-block;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.cursor {
+    display: inline-block;
+    animation: blinkTextCursor 500ms infinite normal;
+}
+
+/* Animations */
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blinkTextCursor {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
