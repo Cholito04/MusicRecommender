@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import styles from "../styles/button.module.css";
 
 function PlaylistEnter() {
   const [error, setError] = useState<string | null>(null);
@@ -58,35 +59,41 @@ function PlaylistEnter() {
             <p className="text-gray-400 mt-2">Logged in as: {username}</p>
           )}
         </div>
-        <div className="mx-auto lg:max-w-310 max-w-200 p-3">
-          <div className="flex justify-center gap-2">
+        <div
+          className={` mx-auto lg:max-w-190 max-w-150 rounded-t-lg w-full h-10 ${styles.playertop}`}
+        >
+          {" "}
+        </div>
+        <div
+          className={`mx-auto lg:max-w-190 max-w-150 rounded-b-lg w-ful py-10 ${styles.player}`}
+        >
+          <div className="flex justify-center lg:gap-20 gap-10">
             <input
               name="playlist"
               placeholder="Paste entire URL"
-              className="text-white max-w-200 p-2 rounded mb-6 text-2xl bg-gray-800"
+              className={`text-black lg:max-w-100 w-70 p-2 rounded-xl mb-6 text-2xl ${styles.lcd}`}
               required
               disabled={loading}
             />
-            <button
-              type="submit"
-              disabled={loading}
-              className="text-white max-h-12 px-4 rounded text-xl bg-indigo-800 hover:bg-indigo-500 transition disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {loading ? "Processing..." : "Generate"}
-            </button>
-          </div>
-
-          {/* Loading indicator */}
-          {loading && (
-            <div className="mt-4">
-              <p className="text-xl text-gray-300 mb-2">
-                Analyzing your playlist...
-              </p>
-              <div className="w-64 h-2 bg-gray-700 rounded-full overflow-hidden mx-auto">
-                <div className="h-full bg-linear-to-r from-indigo-500 to-purple-500 animate-pulse"></div>
-              </div>
+            <div className="flex flex-col justify-center ">
+              <button
+                type="submit"
+                disabled={loading}
+                className={` h-[80-px] ${styles.button2}`}
+              ></button>
+              <p> Generate</p>
             </div>
-          )}
+          </div>
+          {/* Loading indicator */}
+          <div className={`mx-auto lg:w-120 w-100 text-center p-5 rounded mt-4 ${styles.lcdcon}`}>
+            <p className={`text-xl mb-5 rounded-lg h-7 ${styles.lcd}`}>
+              {loading ? "Analyzing your playlist..." : ""}
+            </p>
+            <div className={styles.loadingBar}>
+              {/* only animate when loading */}
+              {loading && <div className={styles.loadingFill}></div>}
+            </div>
+          </div>
 
           {error && <p className="text-red-400 text-lg mt-4">{error}</p>}
         </div>

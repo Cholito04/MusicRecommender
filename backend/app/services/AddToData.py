@@ -30,7 +30,7 @@ def get_candidate_tracks(c_playlist_id, filename="candidate_tracks.csv"):
         return candidate_tracks
 
 
-def save_canidate_to_db(candidate_tracks):
+def save_candidate_to_db(candidate_tracks):
     with sqlite3.connect(DB_PATH) as conn:
         cursor = conn.cursor()
         cursor.execute("PRAGMA foreign_keys = ON;")
@@ -39,12 +39,12 @@ def save_canidate_to_db(candidate_tracks):
             cursor.execute('''
                 INSERT OR IGNORE INTO songs (
                     track_id, track_name, artist, parent_genre, cover_url,
-                    danceability, energy, valence, speechiness,
+                    preview_url, danceability, energy, valence, speechiness,
                     acousticness, instrumentalness, liveness, tempo, loudness
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 row['track_id'], row['track_name'], row['artist_name'],
-                str(row['genre']), row['cover_url'],
+                str(row['genre']), row['cover_url'], row['preview_url'],
                 row['danceability'], row['energy'], row['valence'],
                 row['speechiness'], row['acousticness'],
                 row['instrumentalness'], row['liveness'],
@@ -58,7 +58,7 @@ def main():
     c_playlist_id = "7akjhHXrGWcbFZeRjfZzp2"  # Example candidate playlist ID
 
     candidate_tracks = get_candidate_tracks(c_playlist_id)
-    save_canidate_to_db(candidate_tracks)
+    save_candidate_to_db(candidate_tracks)
     print(candidate_tracks.head())
 
 

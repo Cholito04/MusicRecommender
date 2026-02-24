@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import styles from "../styles/button.module.css";
 
 function Getuser() {
   const [error, setError] = useState<string | null>(null);
@@ -29,29 +30,33 @@ function Getuser() {
   }
   return (
     <form onSubmit={handleSubmit}>
-      <div className="text-white w-full lg:px-4 px-10 py-36 mx-auto text-center">
+      <div className="text-white lg:max-w-210 w-full lg:px-4 px-10 py-36 mx-auto text-center">
         <div className="mx-auto py-10">
           <h1 className="text-6xl">Log In</h1>
         </div>
-        <div className="mx-auto lg:max-w-310 max-w-200 p-3 gap-2">
-          <div className="flex justify-center">
-            <input
-              name="username"
-              placeholder="Enter username"
-              className="text-white max-w-200 p-2 rounded w-full mb-6 text-2xl"
-              required
-            />
-            <button
-              type="submit"
-              className=" text-white max-h-12 mx-auto px-4 rounded text-xl bg-indigo-800
-            hover:bg-indigo-500 transition"
-            >
-              Log In
-            </button>
+        <div
+          className={` mx-auto lg:max-w-210 max-w-150 rounded-t-lg w-full h-12 ${styles.playertop}`}
+        ></div>
+        <div
+          className={` mx-auto lg:max-w-210 max-w-150 w-full rounded-b-2xl shadow-xl py-5 ${styles.player}`}
+        >
+          <div className="mx-auto lg:max-w-210 max-w-100 p-3">
+            <div className="flex justify-center gap-10 mx-auto ">
+              <input
+                name="username"
+                placeholder="Enter username"
+                className={`text-black lg:max-w-100 md:w-80 sm:w-60 p-2 rounded-xl mb-6 text-2xl ${styles.lcd}`}
+                required
+              />
+              <div>
+                <button type="submit" className={styles.button}></button>
+                <p className="text-gray-100">Enter</p>
+              </div>
+            </div>
           </div>
         </div>
-        {error && <p className="text-red-400 text-lg mb-4">{error}</p>}
       </div>
+      {error && <p className="text-red-400 text-lg mb-4">{error}</p>}
     </form>
   );
 }

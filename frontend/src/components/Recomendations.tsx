@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import styles from "../styles/button.module.css";
 
 interface Recommendation {
   track_name: string;
+  track_id: string;
   artist_name: string;
-  score: number;
+  cover_art: string;
 }
 
 function Recommendations() {
@@ -58,16 +60,46 @@ function Recommendations() {
       <h1 className="text-6xl text-center mb-10">Your Recommendations</h1>
 
       {error && <p className="text-red-400 text-center text-xl">{error}</p>}
+      <div
+        className={` mx-auto lg:max-w-310 max-w-150 rounded-t w-full h-10 ${styles.playertop}`}
+      ></div>
 
       {recommendations.length > 0 && (
-        <div className="max-w-4xl mx-auto">
+        <div
+          className={`lg:max-w-310 max-w-150 mx-auto lg:flex justify-center gap-5 rounded-b-2xl ${styles.player}`}
+        >
           {recommendations.map((rec, idx) => (
-            <div key={idx} className="bg-gray-800 p-6 rounded-lg mb-4">
-              <h2 className="text-2xl font-bold">{rec.track_name}</h2>
-              <p className="text-gray-400 text-lg">{rec.artist_name}</p>
-              <p className="text-green-400 mt-2">
-                Match: {(rec.score * 100).toFixed(1)}%
-              </p>
+            <div
+              key={idx}
+              className={` p-6 w-100 rounded-lg mx-auto text-center flex justify-center lg:flex-col gap-5 items-center ${styles.player}`}
+            >
+              <div className={` rounded-full p-5 ${styles.cdholder} `} >
+                <img
+                  src={rec.cover_art}
+                  alt="Album cover"
+                  width="200"
+                  height="200"
+                  className={` rounded-full ${styles.spin_image}`}
+                />
+              </div>
+              <div className=" mx-auto text-center lg:flex gap-5 justify-center">
+                <div className="mx-auto text-center p-2">
+                  <h2 className="text-xl font-bold">{rec.track_name}</h2>
+                  <p className="text-cyan-300 text-lg">{rec.artist_name}</p>
+                </div>
+                <div className="flex flex-col items-center">
+                  {rec.track_id && (
+                    <a
+                      type="submit"
+                      href={`https://open.spotify.com/track/${rec.track_id}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${styles.button} ${styles.buttonSm}`}
+                    ></a>
+                  )}
+                  <p> Open on Spotify</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>

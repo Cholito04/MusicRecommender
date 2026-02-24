@@ -16,7 +16,8 @@ app = FastAPI(title="Music Recommender")
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],  # Your React dev server
+    allow_origins=["http://localhost:5173",
+                   "http://localhost:3000"],  # Your React dev server
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -89,7 +90,9 @@ def recommend(playlist_id: str):
         recommendations.append({
             "track_name": song["track_name"],
             "artist_name": song["artist"],
-            "score": float(scores[rank].item())
+            "cover_art": song["cover_url"],
+            "music_url": song["preview_url"],
+            "track_id": song["track_id"]
         })
 
     return {"playlist_id": playlist_id, "recommendations": recommendations}

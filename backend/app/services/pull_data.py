@@ -89,6 +89,7 @@ def fetch_playlist_features(playlist_id):
             'artist_name': track['artists'][0]['name'],
             'genre': artist['genres'],
             'cover_url': cover_url,
+            'preview_url': track['preview_url'],
             # audio features
             "danceability": features.get("danceability"),
             "energy": features.get("energy"),
@@ -125,12 +126,12 @@ def save_to_db(username, playlist_id, tracks_df):
             cursor.execute('''
                 INSERT OR IGNORE INTO songs (
                     track_id, track_name, artist, parent_genre, cover_url,
-                    danceability, energy, valence, speechiness,
+                    preview_url, danceability, energy, valence, speechiness,
                     acousticness, instrumentalness, liveness, tempo, loudness
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 row['track_id'], row['track_name'], row['artist_name'],
-                str(row['genre']), row['cover_url'],
+                str(row['genre']), row['cover_url'], row['preview_url'],
                 row['danceability'], row['energy'], row['valence'],
                 row['speechiness'], row['acousticness'],
                 row['instrumentalness'], row['liveness'],

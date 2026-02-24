@@ -35,6 +35,7 @@ try:
                 artist TEXT,
                 parent_genre TEXT,
                 cover_url TEXT,
+                preview_url TEXT,
                 danceability REAL,
                 energy REAL,
                 valence REAL,
