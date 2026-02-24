@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "../styles/button.module.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
 function Getuser() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -17,9 +18,7 @@ function Getuser() {
     if (!username) return;
 
     try {
-      const { data } = await axios.get(
-        `http://127.0.0.1:8000/user/${username}`,
-      );
+      const { data } = await axios.get(`${API_URL}/user/${username}`);
       console.log("User:", data);
       localStorage.setItem("username", data.username);
       navigate("/playlistenter", { state: { username: data.username } });

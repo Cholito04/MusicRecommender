@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "../styles/button.module.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
 function UserEnter() {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function UserEnter() {
     if (!username) return;
 
     try {
-      const { data } = await axios.post("http://127.0.0.1:8000/createusers", {
+      const { data } = await axios.post(`${API_URL}/createusers`, {
         username,
       });
 

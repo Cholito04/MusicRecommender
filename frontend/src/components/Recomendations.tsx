@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import styles from "../styles/button.module.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
 interface Recommendation {
   track_name: string;
   track_id: string;
@@ -28,9 +29,7 @@ function Recommendations() {
 
     async function fetchRecommendations() {
       try {
-        const { data } = await axios.get(
-          `http://127.0.0.1:8000/recommend/${playlist_id}`,
-        );
+        const { data } = await axios.get(`${API_URL}/recommend/${playlist_id}`);
         setRecommendations(data.recommendations);
       } catch (err: any) {
         if (err.response?.status === 404) {
@@ -73,7 +72,7 @@ function Recommendations() {
               key={idx}
               className={` p-6 w-100 rounded-lg mx-auto text-center flex justify-center lg:flex-col gap-5 items-center ${styles.player}`}
             >
-              <div className={` rounded-full p-5 ${styles.cdholder} `} >
+              <div className={` rounded-full p-5 ${styles.cdholder} `}>
                 <img
                   src={rec.cover_art}
                   alt="Album cover"

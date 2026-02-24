@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import styles from "../styles/button.module.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function PlaylistEnter() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -34,7 +36,7 @@ function PlaylistEnter() {
     }
 
     try {
-      const { data } = await axios.post(`http://127.0.0.1:8000/trackdata`, {
+      const { data } = await axios.post(`${API_URL}/trackdata`, {
         username: username,
         playlist_url: playlist,
       });
@@ -85,7 +87,9 @@ function PlaylistEnter() {
             </div>
           </div>
           {/* Loading indicator */}
-          <div className={`mx-auto lg:w-120 w-100 text-center p-5 rounded mt-4 ${styles.lcdcon}`}>
+          <div
+            className={`mx-auto lg:w-120 w-100 text-center p-5 rounded mt-4 ${styles.lcdcon}`}
+          >
             <p className={`text-xl mb-5 rounded-lg h-7 ${styles.lcd}`}>
               {loading ? "Analyzing your playlist..." : ""}
             </p>

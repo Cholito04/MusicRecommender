@@ -1,5 +1,6 @@
 # run pip install spotipy
 # run pip install pandas
+from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
@@ -13,12 +14,12 @@ from sklearn.preprocessing import MinMaxScaler
 
 # Authenticate using client credentials
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
-    client_id="1087a50f38b64d5f9264509b58d129c0",
-    client_secret="04958a2e376941d1ad96d96712522f53"
+    client_id=os.getenv("client_id"),
+    client_secret=os.getenv("client_secret")
 ))
 
 # API settings for ReccoBeats
-RECCO_BEATS_API_URL = "https://api.reccobeats.com/v1/audio-features?ids="
+RECCO_BEATS_API_URL = os.getenv("RECCO_BEATS_API_URL")
 RECCO_BEATS_HEADERS = {
     'Accept': 'application/json'
 }
