@@ -1,9 +1,9 @@
 
 from fastapi import FastAPI, HTTPException
-from ml.inference import (recommend_songs, load_candidate_songs,
-                          load_playlist_songs)
-from services.pull_data import (normalize_features, fetch_playlist_features,
-                                save_to_db)
+from ..ml.inference import (recommend_songs, load_candidate_songs,
+                            load_playlist_songs)
+from ..services.pull_data import (normalize_features, fetch_playlist_features,
+                                  save_to_db)
 from .users import router as users_router
 import torch
 import pandas as pd
