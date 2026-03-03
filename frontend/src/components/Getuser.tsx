@@ -54,8 +54,8 @@ function Getuser() {
             </div>
           </div>
         </div>
+        {error && <p className="text-red-400 text-lg mb-4">{error}</p>}
       </div>
-      {error && <p className="text-red-400 text-lg mb-4">{error}</p>}
     </form>
   );
 }

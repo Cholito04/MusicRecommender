@@ -1,6 +1,6 @@
+from dotenv import load_dotenv
 # run pip install spotipy
 # run pip install pandas
-from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 import pandas as pd
@@ -11,11 +11,12 @@ import sqlite3
 # used to normalize data
 from sklearn.preprocessing import MinMaxScaler
 
+load_dotenv()
 
 # Authenticate using client credentials
 sp = spotipy.Spotify(auth_manager=SpotifyClientCredentials(
-    client_id=os.getenv("client_id"),
-    client_secret=os.getenv("client_secret")
+    client_id=os.getenv("SPOTIFY_CLIENT_ID"),
+    client_secret=os.getenv("SPOTIFY_CLIENT_SECRET")
 ))
 
 # API settings for ReccoBeats
