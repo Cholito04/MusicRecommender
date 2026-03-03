@@ -16,8 +16,10 @@ app = FastAPI(title="Music Recommender")
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173",
-                   "http://localhost:3000"],  # Your React dev server
+    allow_origins=[
+        "https://music-recommender.vercel.app",  #Vercel URL
+        "http://localhost:5173",  #local development
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
