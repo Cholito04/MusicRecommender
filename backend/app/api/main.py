@@ -17,7 +17,7 @@ app = FastAPI(title="Music Recommender")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://music-recommender.vercel.app",  #Vercel URL
+        "https://music-recommender-4c901zq77-mauricio-manceras-projects.vercel.app",  #Vercel URL
         "http://localhost:5173",  #local development
     ],
     allow_credentials=True,
