@@ -5,6 +5,7 @@ import PlaylistEnter from "./components/PlaylistEnter";
 import UserEnter from "./components/UserEnter";
 import Getuser from "./components/Getuser";
 import Recommendations from "./components/Recomendations";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/reccomendations" element={<Recommendations />} />
         </Routes>
       </BrowserRouter>
+      <Analytics />
     </div>
   );
 }
