@@ -18,6 +18,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "https://music-recommender-4c901zq77-mauricio-manceras-projects.vercel.app",  #Vercel URL
+        "https://music.mauriciomancera.dev", #custom URL
         "http://localhost:5173",  #local development
     ],
     allow_credentials=True,
