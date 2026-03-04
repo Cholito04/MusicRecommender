@@ -13,11 +13,11 @@ function Hero() {
             className={` p-14 mx-auto lg:max-w-180 max-w-150 rounded-b-3xl w-full ${styles.tv}`}
           >
             <div className={`p-8 mx-auto rounded-3xl w-full ${styles.lcd}`}>
-              <h1 className=" m-5 xl:text-6xl text-5xl lg:max-w-310 max-w-200">
+              <h1 className=" m-5 xl:text-6xl text-3xl lg:max-w-310 max-w-200">
                 {" "}
                 Music Reccomender
               </h1>
-              <p className="text-xl m-5">
+              <p className="lg:text-xl text-sm m-5">
                 {" "}
                 Recommend songs based of your public playlist or any public
                 playlist.
@@ -26,7 +26,7 @@ function Hero() {
           </div>
           <div className="text-center m-10">
             <div
-              className={`p-8 mx-auto rounded-3xl max-w-90 max-h-40 w-full px-3 flex justify-center gap-24 ${styles.signIn}`}
+              className={`p-8 mx-auto rounded-3xl lg:max-w-90 max-w-70 max-h-40 w-full px-3 flex justify-center lg:gap-24 gap-10 ${styles.signIn}`}
             >
               <div>
                 {" "}

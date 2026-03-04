@@ -56,7 +56,7 @@ function PlaylistEnter() {
     <form onSubmit={handleSubmit}>
       <div className="text-white w-full lg:px-4 px-10 py-36 mx-auto text-center">
         <div className="mx-auto py-10">
-          <h1 className="text-6xl">Enter Spotify Playlist URL</h1>
+          <h1 className="md:text-6xl text-3xl ">Enter Spotify Playlist URL</h1>
           {username && (
             <p className="text-gray-400 mt-2">Logged in as: {username}</p>
           )}
@@ -69,11 +69,11 @@ function PlaylistEnter() {
         <div
           className={`mx-auto lg:max-w-190 max-w-150 rounded-b-lg w-ful py-10 ${styles.player}`}
         >
-          <div className="flex justify-center lg:gap-20 gap-10">
+          <div className="flex justify-center lg:gap-20 gap-5">
             <input
               name="playlist"
               placeholder="Paste entire URL"
-              className={`text-black lg:max-w-100 w-70 p-2 rounded-xl mb-6 text-2xl ${styles.lcd}`}
+              className={`text-black lg:max-w-100 md:w-90 w-60 md:h-15 h-10 p-2 rounded-xl mb-6 md:text-2xl text-xl ${styles.lcd}`}
               required
               disabled={loading}
             />
@@ -88,7 +88,7 @@ function PlaylistEnter() {
           </div>
           {/* Loading indicator */}
           <div
-            className={`mx-auto lg:w-120 w-100 text-center p-5 rounded mt-4 ${styles.lcdcon}`}
+            className={`mx-auto md:w-120 w-80 text-center p-5 rounded mt-4 ${styles.lcdcon}`}
           >
             <p className={`text-xl mb-5 rounded-lg h-7 ${styles.lcd}`}>
               {loading ? "Analyzing your playlist..." : ""}

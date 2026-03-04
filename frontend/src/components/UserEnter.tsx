@@ -47,11 +47,11 @@ function UserEnter() {
           className={` mx-auto lg:max-w-210 max-w-150 w-full rounded-b-2xl shadow-xl py-5 ${styles.player}`}
         >
           <div className="mx-auto lg:max-w-210 max-w-100 p-3">
-            <div className="flex justify-center gap-10 mx-auto ">
+            <div className="flex justify-center md:gap-10 gap-5 mx-auto ">
               <input
                 name="username"
                 placeholder="Enter username"
-                className={`text-black lg:max-w-100 md:w-80 sm:w-60 p-2 rounded-xl mb-6 text-2xl ${styles.lcd}`}
+                className={`text-black lg:max-w-100 md:w-80 sm:w-60 p-2 rounded-xl mb-6 md:text-2xl sm:text-xl ${styles.lcd}`}
                 required
               />
               <div>
