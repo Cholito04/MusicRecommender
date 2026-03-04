@@ -69,11 +69,11 @@ function PlaylistEnter() {
         <div
           className={`mx-auto lg:max-w-190 max-w-150 rounded-b-lg w-ful py-10 ${styles.player}`}
         >
-          <div className="flex justify-center lg:gap-20 gap-5">
+          <div className="flex justify-center lg:gap-20 gap-3">
             <input
               name="playlist"
               placeholder="Paste entire URL"
-              className={`text-black lg:max-w-100 md:w-90 w-60 md:h-15 h-10 p-2 rounded-xl mb-6 md:text-2xl text-xl ${styles.lcd}`}
+              className={`text-black lg:max-w-100 md:w-90 w-50 md:h-15 h-10 p-2 rounded-xl mb-6 md:text-2xl text-xl ${styles.lcd}`}
               required
               disabled={loading}
             />
@@ -81,7 +81,7 @@ function PlaylistEnter() {
               <button
                 type="submit"
                 disabled={loading}
-                className={` h-[80-px] ${styles.button2}`}
+                className={`lg:h-16 lg:w-16 w-10 h-10 ${styles.buttonSm} mx-auto`}
               ></button>
               <p> Generate</p>
             </div>
@@ -93,7 +93,9 @@ function PlaylistEnter() {
             <p className={`text-xl mb-5 rounded-lg h-7 ${styles.lcd}`}>
               {loading ? "Analyzing your playlist..." : ""}
             </p>
-            <div className={` md:w-70 w-30 h-5 rounded-4xl ${styles.loadingBar}`}>
+            <div
+              className={` md:w-70 w-30 h-5 rounded-4xl ${styles.loadingBar}`}
+            >
               {/* only animate when loading */}
               {loading && <div className={styles.loadingFill}></div>}
             </div>
