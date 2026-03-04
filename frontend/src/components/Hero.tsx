@@ -12,7 +12,9 @@ function Hero() {
           <div
             className={` md:p-18 p-10 mx-auto lg:max-w-180 max-w-120 rounded-b-3xl w-full ${styles.tv}`}
           >
-            <div className={`md:p-10 p-4 mx-auto rounded-3xl w-full ${styles.lcd}`}>
+            <div
+              className={`md:p-10 p-4 mx-auto rounded-3xl w-full ${styles.lcd}`}
+            >
               <h1 className=" m-2 xl:text-6xl text-2xl lg:max-w-310 max-w-200">
                 {" "}
                 Music Reccomender
@@ -26,7 +28,7 @@ function Hero() {
           </div>
           <div className="text-center m-10">
             <div
-              className={`p-8 mx-auto rounded-3xl lg:max-w-90 max-w-70 max-h-40 w-full px-3 flex justify-center lg:gap-24 gap-10 ${styles.signIn}`}
+              className={`p-10 mx-auto rounded-3xl lg:max-w-90 max-w-80 max-h-40 w-full px-3 flex justify-center lg:gap-24 gap-8 ${styles.signIn}`}
             >
               <div>
                 {" "}
