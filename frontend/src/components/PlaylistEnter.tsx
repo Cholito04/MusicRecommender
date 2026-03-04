@@ -88,12 +88,12 @@ function PlaylistEnter() {
           </div>
           {/* Loading indicator */}
           <div
-            className={`mx-auto md:w-120 w-80 text-center p-5 rounded mt-4 ${styles.lcdcon}`}
+            className={`mx-auto md:w-120 w-60 text-center p-5 rounded mt-4 ${styles.lcdcon}`}
           >
             <p className={`text-xl mb-5 rounded-lg h-7 ${styles.lcd}`}>
               {loading ? "Analyzing your playlist..." : ""}
             </p>
-            <div className={styles.loadingBar}>
+            <div className={` md:w-70 w-30 h-5 rounded-4xl ${styles.loadingBar}`}>
               {/* only animate when loading */}
               {loading && <div className={styles.loadingFill}></div>}
             </div>
